@@ -1,6 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs/promises');
 
+let departments = [];
+
 
 //Funciton to initialize employee tracker app
 const initApp = () => {
@@ -10,7 +12,7 @@ const initApp = () => {
                 type: "list",
                 message: "What would you like to do?",
                 name: "initApp",
-                choices: ['View All Employees', 'View All Departments', 'View All Roles', 'Update Employee Role', 'Add Role', 'Add Department', 'Quit']
+                choices: ['View All Employees', 'View All Departments', 'View All Roles', 'Add Role', 'Update Employee Role', 'Add Department', 'Quit']
             }
         ])
         .then(response => {
@@ -20,7 +22,7 @@ const initApp = () => {
                     break;
 
                 case 'View All Departments':
-                    viewDepartments();
+                    viewAllDepartments();
                     break;
                     
                 case 'View All Roles':
@@ -35,8 +37,8 @@ const initApp = () => {
                     addRole();
                     break;
 
-                case 'Add Department':
-                    addDepartment();
+                case 'Add New Department':
+                    addNewDepartment();
                     break;
 
                 case 'Quit':
@@ -51,23 +53,60 @@ const viewAllEmployees = () => {
     inquirer
         .prompt([
             {
-                 name: "View All Employees"
+                 name: "viewAllEmployees"
             }
         ])
-        .then((viewAllResponse) => {
+        .then((viewAllemployeesRes) => {
             initApp();
         })
 }
 
-// function for updating employee roles
+// function for viewing all departments
+const viewAllDepartments = () => {
+    inquirer
+        .prompt([
+            {
+                name: "viewAllDepartments"
+            }
+        ])
+        .then((viewAllDepartmentsRes) => {
+            initApp();
+        })
+}
 
 // function for viewing all roles
+const viewAllRoles = () => {
+    inquirer
+        .prompt([
+            {
+                name: "viewAllRoles"
+            }
+        ])
+        .then((viewAllRolesres) => {
+            initApp();
+        })
+}
 
 // function for adding roles
 
-// function for viewing all departments
+
+// function for updating employee roles
 
 // function for adding new department
+const addNewDepartment = () => {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the name of the department?",
+                name: "addNewDepartment"
+            }
+        ])
+        .then((addNewDepRes) => {
+
+            initApp();
+        })
+}
 
 
 initApp();
