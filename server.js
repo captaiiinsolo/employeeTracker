@@ -1,7 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
@@ -17,10 +17,10 @@ const db = mysql.createConnection(
   console.log(`Connected to the Employee database.`)
 );
 
-db.query('SELECT * FROM companyInfo', function (err, results) {
+db.query('SELECT * FROM departments', function (err, results) {
     console.log(results);
   });
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port http://localhost:${PORT}`);
   });
