@@ -1,7 +1,17 @@
 const inquirer = require('inquirer');
 const fs = require('fs/promises');
+const mysql = require('mysql2');
 
-let departments = [];
+const db = mysql.createConnection(
+    {
+      host: 'localhost',
+      user: 'root',
+      password: 'password',
+      database: 'companyInfo_db'
+    },
+    console.log(`Connected to the Employee database.`)
+  );
+  
 
 
 //Funciton to initialize employee tracker app
@@ -63,15 +73,20 @@ const viewAllEmployees = () => {
 
 // function for viewing all departments
 const viewAllDepartments = () => {
-    inquirer
-        .prompt([
-            {
-                name: "viewAllDepartments"
-            }
-        ])
-        .then((viewAllDepartmentsRes) => {
-            initApp();
-        })
+
+    db.query('SELECT * FROM departments', function (err, results) {
+        console.log(results);
+      });
+  
+    // inquirer
+    //     .prompt([
+    //         {
+    //             name: "viewAllDepartments"
+    //         }
+    //     ])
+    //     .then((viewAllDepartmentsRes) => {
+    //         initApp();
+    //     })
 }
 
 // function for viewing all roles
