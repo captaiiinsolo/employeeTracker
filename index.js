@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs/promises');
 const mysql = require('mysql2');
+const cTable = require('console.table');
 
 const db = mysql.createConnection(
     {
@@ -75,7 +76,7 @@ const viewAllEmployees = () => {
 const viewAllDepartments = () => {
 
     db.query('SELECT * FROM departments', function (err, results) {
-        console.log(results);
+        console.table(results);
       });
 
       initApp();
