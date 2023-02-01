@@ -77,6 +77,8 @@ const viewAllDepartments = () => {
     db.query('SELECT * FROM departments', function (err, results) {
         console.log(results);
       });
+
+      initApp();
   
     // inquirer
     //     .prompt([
@@ -91,15 +93,7 @@ const viewAllDepartments = () => {
 
 // function for viewing all roles
 const viewAllRoles = () => {
-    inquirer
-        .prompt([
-            {
-                name: "viewAllRoles"
-            }
-        ])
-        .then((viewAllRolesres) => {
-            initApp();
-        })
+ 
 }
 
 // function for adding roles
@@ -118,7 +112,7 @@ const addNewDepartment = () => {
             }
         ])
         .then((addNewDepRes) => {
-
+            console.log(addNewDepRes);
             initApp();
         })
 }

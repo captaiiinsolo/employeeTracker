@@ -11,6 +11,9 @@ CREATE TABLE departments (
 
 );
 
+-- Starts department id @ 1000 and increments up from there
+ALTER TABLE departments AUTO_INCREMENT = 1001;
+
 -- Table for roles info
 DROP TABLE IF EXISTS roles;
 CREATE TABLE roles (
@@ -22,6 +25,8 @@ CREATE TABLE roles (
     REFERENCES departments(id)
 
 );
+
+ALTER TABLE roles AUTO_INCREMENT = 2001;
 
 -- Table for employee info
 DROP TABLE IF EXISTS employees;
@@ -35,3 +40,5 @@ CREATE TABLE employees (
     REFERENCES roles(id)
 
 );
+
+ALTER TABLE employees AUTO_INCREMENT = 3001;
