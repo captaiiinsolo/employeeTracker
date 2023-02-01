@@ -42,3 +42,8 @@ CREATE TABLE employees (
 );
 
 ALTER TABLE employees AUTO_INCREMENT = 3001;
+
+SELECT department.id
+FROM department
+INNER JOIN role
+ON department.id = role.department;
