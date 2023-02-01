@@ -61,21 +61,27 @@ const initApp = () => {
 
 // function for Viewing all Employees
 const viewAllEmployees = () => {
-    inquirer
-        .prompt([
-            {
-                 name: "viewAllEmployees"
-            }
-        ])
-        .then((viewAllemployeesRes) => {
-            initApp();
-        })
+
+    db.query('SELECT * FROM employees', function (err, results) {
+        console.table(results);
+      });
+
+      initApp();
+    // inquirer
+    //     .prompt([
+    //         {
+    //              name: "viewAllEmployees"
+    //         }
+    //     ])
+    //     .then((viewAllemployeesRes) => {
+    //         initApp();
+    //     })
 }
 
 // function for viewing all departments
 const viewAllDepartments = () => {
 
-    db.query('SELECT * FROM departments', function (err, results) {
+    db.query('SELECT * FROM department', function (err, results) {
         console.table(results);
       });
 
@@ -94,7 +100,12 @@ const viewAllDepartments = () => {
 
 // function for viewing all roles
 const viewAllRoles = () => {
- 
+
+    db.query('SELECT * FROM role', function (err, results) {
+        console.table(results);
+      });
+
+      initApp();
 }
 
 // function for adding roles
