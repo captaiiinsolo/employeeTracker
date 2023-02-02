@@ -15,8 +15,8 @@ CREATE TABLE department (
 ALTER TABLE department AUTO_INCREMENT = 1001;
 
 -- Table for roles info
-DROP TABLE IF EXISTS role;
-CREATE TABLE role (
+DROP TABLE IF EXISTS roles;
+CREATE TABLE roles (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
     salary DECIMAL,
@@ -26,7 +26,7 @@ CREATE TABLE role (
 
 );
 
-ALTER TABLE role AUTO_INCREMENT = 2001;
+ALTER TABLE roles AUTO_INCREMENT = 2001;
 
 -- Table for employee info
 DROP TABLE IF EXISTS employees;
@@ -34,10 +34,10 @@ CREATE TABLE employees (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    role INT, 
+    roles INT, 
     manager_id INT DEFAULT NULL,
-    FOREIGN KEY (role)
-    REFERENCES role(id)
+    FOREIGN KEY (roles)
+    REFERENCES roles(id)
 
 );
 
