@@ -23,13 +23,17 @@ const initApp = () => {
                 type: "list",
                 message: "What would you like to do?",
                 name: "initApp",
-                choices: ['View All Employees', 'View All Departments', 'View All Roles', 'Add Role', 'Update Employee Role', 'Add Department', 'Quit']
+                choices: ['View All Employees', 'Update Employee Role', 'Add New Employee', new inquirer.Separator(), 'View All Departments', 'Add New Department', new inquirer.Separator(), 'View All Roles', 'Add Role', new inquirer.Separator(), 'Quit']
             }
         ])
         .then(response => {
             switch (response.initApp) {
                 case 'View All Employees':
                     viewAllEmployees();
+                    break;
+
+                case 'Add New Employee':
+                    addNewEmployee();
                     break;
 
                 case 'View All Departments':
@@ -62,7 +66,7 @@ const initApp = () => {
 // function for Viewing all Employees
 const viewAllEmployees = () => {
 
-    db.query('SELECT * FROM employees', function (err, results, fields) {
+    db.query('SELECT employees.id, employees.first_name, employees.last_name, employees.roles, employees.manager_id, roles.title, roles.salary FROM employees INNER JOIN roles ON employees.roles = roles.id;', function (err, results, fields) {
         console.table('All Employees...', results)
 
         initApp();
@@ -93,6 +97,46 @@ const viewAllRoles = () => {
 
 }
 
+// function for adding new employee
+const addNewEmployee = () => {
+    inquirer
+        .prompt([
+            {
+                type:"input",
+                message: "What is the employees first name?",
+                name: "firstName"
+            },
+
+            {
+                type: "input",
+                message: "What is the employees last name?",
+                name: "lastName"
+            },
+
+            {
+                type: "input",
+                message: "What is the employees role?",
+                name: "empRole"
+            },
+
+            {
+                type: "input",
+                message: "Enter the employees manager's name (if applicable)",
+                name: "empManager"
+            }
+        ])
+        .then((newEmpRes) => {
+            db.query('INSERT INTO employees SET ?;', {
+                first_name: newEmpRes.firstName,
+                last_name: newEmpRes.lastName,
+                roles: newEmpRes.empRole,
+                manager_id: newEmpRes.empManager
+            });
+            initApp();
+        })
+}
+
+
 // function for adding roles
 const addRole = () => {
     inquirer
@@ -105,7 +149,7 @@ const addRole = () => {
 
             {
                 type: "input",
-                mesasge: "What is the salary of the role?",
+                message: "What is the salary of the role?",
                 name: "addRoleSalary"
             },
 
@@ -139,13 +183,13 @@ const addNewDepartment = () => {
         .prompt([
             {
                type: "input",
-               mesasge: "What is the name of the department?",
+               message: "What is the name of the department?",
                name: "addNewDep" 
             }
         ])
         .then((addNewDepRes) => {
-            db.query('INSERT INTO roles SET ?;', {
-                name: addNewDepRes.addNewDep
+            db.query('INSERT INTO department SET ?;', {
+                name: addNewDepRes.addNewDep,
             });
             initApp();
         })
