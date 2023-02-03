@@ -41,7 +41,7 @@ const initApp = () => {
                     break;
 
                 case 'Update Employee Role':
-                updateEmployeeRole();
+                    updateEmployeeRole();
                 break;
 
                 case 'Add Role':
@@ -62,51 +62,91 @@ const initApp = () => {
 // function for Viewing all Employees
 const viewAllEmployees = () => {
 
-    db.query('SELECT * FROM employees', function (err, results) {
-        console.table('All Employees...', results);
-      });
+    db.query('SELECT * FROM employees', function (err, results, fields) {
+        console.table('All Employees...', results)
 
-      initApp();
+        initApp();
+      })
+
 }
 
 // function for viewing all departments
 const viewAllDepartments = () => {
 
-    db.query('SELECT * FROM department', function (err, results) {
-        console.table('All Departments...', results);
-      });
+    db.query('SELECT * FROM department', function (err, results, fields) {
+        console.table('All Departments...', results)
 
-      initApp();
+        initApp();
+      })
+
 
 }
 
 // function for viewing all roles
 const viewAllRoles = () => {
 
-    db.query('SELECT * FROM roles', function (err, results) {
-        console.table('All Roles...', results);
-      });
+    db.query('SELECT * FROM roles', function (err, results, fields) {
+        console.table('All Roles...', results)
 
-      initApp();
+        initApp();
+      })
+
 }
 
 // function for adding roles
+const addRole = () => {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the name of the role?",
+                name: "addNewRole"
+            },
+
+            {
+                type: "input",
+                mesasge: "What is the salary of the role?",
+                name: "addRoleSalary"
+            },
+
+            {
+                type: "list",
+                message: "Which department does the role belong to?",
+                name: "addRoleDep",
+                choices: ['Engineering', 'Finance', 'Legal', 'Sales', 'Service']
+            }
+        ])
+        .then((addRoleRes) => {
+            db.query('INSERT INTO roles SET ?;', {
+                title: addRoleRes.addNewRole,
+                salary: addRoleRes.addRoleSalary
+
+            });
+            initApp();
+        })
+
+}
 
 
 // function for updating employee roles
+const updateEmployeeRole = () => {
+
+}
 
 // function for adding new department
 const addNewDepartment = () => {
     inquirer
         .prompt([
             {
-                type: "input",
-                message: "What is the name of the department?",
-                name: "addNewDepartment"
+               type: "input",
+               mesasge: "What is the name of the department?",
+               name: "addNewDep" 
             }
         ])
         .then((addNewDepRes) => {
-            console.log(addNewDepRes);
+            db.query('INSERT INTO roles SET ?;', {
+                name: addNewDepRes.addNewDep
+            });
             initApp();
         })
 }
