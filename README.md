@@ -14,7 +14,6 @@
 
 | Technology Used |                             Resource URL                              |
 | --------------- | :-------------------------------------------------------------------: |
-| HTML            |    [MDN - HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)    |
 | JavaScript      |  [MDN - JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript)  |
 | Git             |                      [Git](https://git-scm.com/)                      |
 | Node            |               [Node Docs](https://nodejs.org/en/docs/)                |
